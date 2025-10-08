@@ -1,0 +1,11 @@
+[project]
+name = "gig-polyhedra-stacking"
+version = "0.1.0"
+description = "M2 GIG Polyhedra Stacking Problem"
+readme = "README.md"
+requires-python = ">=3.13"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
