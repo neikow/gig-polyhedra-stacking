@@ -17,6 +17,16 @@ uv sync
 
 Avec ces deux contraintes, il faut trouver l'empilement qui maximise la somme des volumes des polyèdres.
 
+### Formalisation
+
+Étant donné un conteneur $P \subset \mathbb{R}^3$ et un ensemble d’objets $P_1, \ldots, P_n$, trouver une configuration $(S, {T_i}_{i \in S})$ telle que :
+
+1. $T_i(P_i) \subseteq P$ pour tout $i \in S$ (chaque objet est placé dans le conteneur),
+2. $T_i(P_i) \cap T_j(P_j) = \emptyset$ pour tout $i \neq j$,
+3. la somme des volumes $\sum_{i \in S} \mathrm{Vol}(P_i)$ soit maximale.
+
+où $T_i$ est une transformation rigide (translation + rotation).
+
 ### Précisions
 
 - Tous les polyèdres sont fermés, c'est-à-dire, ils contiennent leur frontière.
