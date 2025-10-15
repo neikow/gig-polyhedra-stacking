@@ -1,35 +1,35 @@
-from typing import TypedDict
+from pydantic import BaseModel
 
-class Point3D(TypedDict):
+class Point3D(BaseModel):
     x: float
     y: float
     z: float
 
-class Vector3D(TypedDict):
+class Vector3D(BaseModel):
     x: float
     y: float
     z: float
 
-class Polyhedron(TypedDict):
+class Polyhedron(BaseModel):
     vertices: list[Point3D]
     faces: list[list[int]]
 
 class Piece(Polyhedron):
     index: int
 
-class ProblemDefinition(TypedDict):
+class ProblemDefinition(BaseModel):
     polyhedron: Polyhedron
     pieces: list[Piece]
 
-class Quaternion(TypedDict):
+class Quaternion(BaseModel):
     s: float
     u: Vector3D
 
-class Placement(TypedDict):
+class Placement(BaseModel):
     index: int
     vecteur: Vector3D
     quaternion: Quaternion
 
-class Solution(TypedDict):
+class Solution(BaseModel):
     volume: float
     polyedres: list[Placement]
