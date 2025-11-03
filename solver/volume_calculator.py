@@ -1,7 +1,15 @@
 from typing import Iterable
 
-from solver.types import Point3D, Polyhedron, Vector3D, ProblemDefinition
+from solver.types import Point3D, Polyhedron, Vector3D, ProblemDefinition, Placement
 import numpy as np
+
+def volume_polyhedrons_triangles(placements : list[Placement], pieces : list[Polyhedron]) -> float:
+    volume = 0.0
+    for placement in placements:
+        index_piece = placement.index
+        piece = pieces[index_piece]
+        volume += volume_polyhedron_triangles(piece)
+    return volume
 
 def volume_polyhedron_triangles(poly: 'Polyhedron', signed: bool = False) -> float:
 
@@ -28,13 +36,12 @@ def volume_polyhedron_triangles(poly: 'Polyhedron', signed: bool = False) -> flo
     b = Vr[F[:, 1]]
     c = Vr[F[:, 2]]
 
-    # Produit mixte a . (b * c) / 6, sommation sur toutes les faces
+    # Produit mixte a.(b * c) / 6, sommation sur toutes les faces
     vol_signed = np.einsum('ij,ij->i', a, np.cross(b, c)).sum() / 6.0
 
     return float(vol_signed if signed else abs(vol_signed))
 
-def test_calcule_volume(problem: ProblemDefinition)\
-        -> float:
+def test_calcule_volume(problem: ProblemDefinition) -> float:
     tetra = Polyhedron(
         vertices=[
             Point3D(x=0, y=0, z=0),  # A
@@ -43,7 +50,7 @@ def test_calcule_volume(problem: ProblemDefinition)\
             Point3D(x=0, y=0, z=1),  # D
         ],
         faces=[
-            [0, 2, 1],  # base (A,C,B)
+            [0, 2, 1],  # base (A, C, B)
             [0, 1, 3],  # A,B,D
             [0, 3, 2],  # A,D,C
             [1, 2, 3],  # B,C,D

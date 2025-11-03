@@ -4,6 +4,7 @@ import numpy as np
 
 from solver.shape_utils.polyhedron import point_inside_polyhedron
 from solver.types import ProblemDefinition, Solution, Polyhedron, Vector3D, Point3D, Quaternion, Placement
+from solver.volume_calculator import volume_polyhedron_triangles, volume_polyhedrons_triangles
 from utils.timer import with_timer
 
 max_placement_attempts = 50
@@ -92,5 +93,5 @@ def solve_random(problem: ProblemDefinition) -> Solution:
 
     return Solution(
         polyedres=placed_pieces,
-        volume=0.0
+        volume= volume_polyhedrons_triangles(placed_pieces, pieces)
     )
