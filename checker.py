@@ -64,5 +64,5 @@ def check_solution(sol_path: str) -> CheckResult:
 
 
 if __name__ == "__main__":
-    result = check_solution("solution_random.json")
+    result = check_solution("solution.json")
     print(result)
