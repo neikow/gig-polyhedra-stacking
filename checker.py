@@ -29,6 +29,9 @@ class CheckResult:
     no_intersections: bool
     positive_volume: bool
 
+    def is_valid(self) -> bool:
+        return self.are_inside and self.no_intersections and self.positive_volume
+
 
 def are_pieces_inside(solution: Solution, problem: ProblemDefinition) -> bool:
     res = True
@@ -53,6 +56,7 @@ def no_intersections(solution: Solution, problem: ProblemDefinition) -> bool:
 
 @with_timer
 def check_solution(sol_path: str) -> CheckResult:
+    print("Checking solution at:", sol_path)
     sol = get_solution(sol_path)
     prob = get_problem_definition()
 
@@ -65,4 +69,4 @@ def check_solution(sol_path: str) -> CheckResult:
 
 if __name__ == "__main__":
     result = check_solution("solution.json")
-    print(result)
+    print(result.is_valid())
