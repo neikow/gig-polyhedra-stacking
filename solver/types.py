@@ -124,16 +124,16 @@ class Placement(BaseModel):
         return transformed_faces
 
     def intersects(self, other: 'Placement', pieces: list[Piece]) -> bool:
-        from solver.intersection import triangle_intersects_plane
+        from solver.intersection import triangles_intersect_3d
 
-        piece1 = next(piece for piece in pieces if piece.index == self.index)
-        piece2 = next(piece for piece in pieces if piece.index == other.index)
-        faces1 = self.transformed_faces(piece1)
-        faces2 = other.transformed_faces(piece2)
+        self_piece = next(piece for piece in pieces if piece.index == self.index)
+        other_piece = next(piece for piece in pieces if piece.index == other.index)
+        self_faces = self.transformed_faces(self_piece)
+        other_faces = other.transformed_faces(other_piece)
 
-        for face1 in faces1:
-            for face2 in faces2:
-                if triangle_intersects_plane(face1, face2, epsilon=1e-10):
+        for self_face in self_faces:
+            for other_face in other_faces:
+                if triangles_intersect_3d(self_face, other_face, epsilon=1e-10):
                     return True
         return False
 

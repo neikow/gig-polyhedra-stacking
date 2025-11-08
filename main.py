@@ -41,7 +41,7 @@ if __name__ == "__main__":
     solution = get_or_create_solution(
         problem,
         algorithm='random',
-        force_recompute=False
+        force_recompute=True
     )
 
     visualize_solution(problem, solution)
